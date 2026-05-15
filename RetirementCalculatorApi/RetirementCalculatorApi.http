@@ -1,0 +1,16 @@
+@RetirementCalculatorApi_HostAddress = http://localhost:5121
+
+POST {{RetirementCalculatorApi_HostAddress}}/api/retirement/calculate
+Content-Type: application/json
+
+{
+  "annualSalary": 100000,
+  "employeeContributionPercent": 10,
+  "currentAge": 30,
+  "retirementAge": 65,
+  "currentRetirementBalance": 0,
+  "expectedAnnualReturnPercent": 7,
+  "employerMatchPercent": 50,
+  "employerMatchLimitPercent": 6
+}
+###
