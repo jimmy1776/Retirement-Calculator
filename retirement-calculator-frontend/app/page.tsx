@@ -2,6 +2,18 @@
 
 import React, { useState } from "react";
 
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+
+
+
 
 type YearlyProjection = {
   year: number;
@@ -250,83 +262,139 @@ export default function Home() {
           </p>
 )}
 
-{result && (
-  <section className="mt-8 rounded-2xl border border-gray-200 bg-gray-50 p-6">
-    <h2 className="text-2xl font-bold text-gray-900">
-      Retirement Projection
-    </h2>
+        {result && (
+          <section className="mt-8 rounded-2xl border border-gray-200 bg-gray-50 p-6">
+            <h2 className="text-2xl font-bold text-gray-900">
+              Retirement Projection
+            </h2>
 
-    <p className="mt-2 text-gray-600">
-      Based on your inputs, here is your estimated retirement outcome.
-    </p>
+            <p className="mt-2 text-gray-600">
+              Based on your inputs, here is your estimated retirement outcome.
+            </p>
 
-    <div className="mt-6 rounded-xl bg-white p-5 shadow-sm">
-      <p className="text-sm font-medium text-gray-500">
-        Projected Retirement Balance
-      </p>
-      <p className="mt-1 text-4xl font-bold text-gray-900">
-        {formatCurrency(result.projectedRetirementBalance)}
-      </p>
-    </div>
+            <div className="mt-6 rounded-xl bg-white p-5 shadow-sm">
+              <p className="text-sm font-medium text-gray-500">
+                Projected Retirement Balance
+              </p>
+              <p className="mt-1 text-4xl font-bold text-gray-900">
+                {formatCurrency(result.projectedRetirementBalance)}
+              </p>
+            </div>
 
-    <div className="mt-6 grid gap-4 md:grid-cols-2">
-      <div className="rounded-xl bg-white p-5 shadow-sm">
-        <p className="text-sm font-medium text-gray-500">
-          Years Until Retirement
-        </p>
-        <p className="mt-1 text-2xl font-semibold text-gray-900">
-          {result.yearsUntilRetirement}
-        </p>
-      </div>
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <div className="rounded-xl bg-white p-5 shadow-sm">
+                <p className="text-sm font-medium text-gray-500">
+                  Years Until Retirement
+                </p>
+                <p className="mt-1 text-2xl font-semibold text-gray-900">
+                  {result.yearsUntilRetirement}
+                </p>
+              </div>
 
-      <div className="rounded-xl bg-white p-5 shadow-sm">
-        <p className="text-sm font-medium text-gray-500">
-          Total Annual Contribution
-        </p>
-        <p className="mt-1 text-2xl font-semibold text-gray-900">
-          {formatCurrency(result.totalAnnualContribution)}
-        </p>
-      </div>
+              <div className="rounded-xl bg-white p-5 shadow-sm">
+                <p className="text-sm font-medium text-gray-500">
+                  Total Annual Contribution
+                </p>
+                <p className="mt-1 text-2xl font-semibold text-gray-900">
+                  {formatCurrency(result.totalAnnualContribution)}
+                </p>
+              </div>
 
-      <div className="rounded-xl bg-white p-5 shadow-sm">
-        <p className="text-sm font-medium text-gray-500">
-          Employee Annual Contribution
-        </p>
-        <p className="mt-1 text-2xl font-semibold text-gray-900">
-          {formatCurrency(result.employeeAnnualContribution)}
-        </p>
-      </div>
+              <div className="rounded-xl bg-white p-5 shadow-sm">
+                <p className="text-sm font-medium text-gray-500">
+                  Employee Annual Contribution
+                </p>
+                <p className="mt-1 text-2xl font-semibold text-gray-900">
+                  {formatCurrency(result.employeeAnnualContribution)}
+                </p>
+              </div>
 
-      <div className="rounded-xl bg-white p-5 shadow-sm">
-        <p className="text-sm font-medium text-gray-500">
-          Employer Annual Match
-        </p>
-        <p className="mt-1 text-2xl font-semibold text-gray-900">
-          {formatCurrency(result.employerAnnualMatch)}
-        </p>
-      </div>
+              <div className="rounded-xl bg-white p-5 shadow-sm">
+                <p className="text-sm font-medium text-gray-500">
+                  Employer Annual Match
+                </p>
+                <p className="mt-1 text-2xl font-semibold text-gray-900">
+                  {formatCurrency(result.employerAnnualMatch)}
+                </p>
+              </div>
 
-      <div className="rounded-xl bg-white p-5 shadow-sm">
-        <p className="text-sm font-medium text-gray-500">
-          Total Contributions
-        </p>
-        <p className="mt-1 text-2xl font-semibold text-gray-900">
-          {formatCurrency(result.totalContributions)}
-        </p>
-      </div>
+              <div className="rounded-xl bg-white p-5 shadow-sm">
+                <p className="text-sm font-medium text-gray-500">
+                  Total Contributions
+                </p>
+                <p className="mt-1 text-2xl font-semibold text-gray-900">
+                  {formatCurrency(result.totalContributions)}
+                </p>
+              </div>
 
-      <div className="rounded-xl bg-white p-5 shadow-sm">
-        <p className="text-sm font-medium text-gray-500">
-          Estimated Investment Growth
-        </p>
-        <p className="mt-1 text-2xl font-semibold text-gray-900">
-          {formatCurrency(result.estimatedInvestmentGrowth)}
-        </p>
-      </div>
-    </div>
-  </section>
-)}
+              <div className="rounded-xl bg-white p-5 shadow-sm">
+                <p className="text-sm font-medium text-gray-500">
+                  Estimated Investment Growth
+                </p>
+                <p className="mt-1 text-2xl font-semibold text-gray-900">
+                  {formatCurrency(result.estimatedInvestmentGrowth)}
+                </p>
+              </div>
+            </div>
 
+            <div className="mt-8 rounded-xl bg-white p-5 shadow-sm">
+              <h3 className="text-xl font-bold text-gray-900">
+                Projected Growth Over Time
+              </h3>
+
+              <p className="mt-1 text-sm text-gray-600">
+                Estimated retirement balance by age.
+              </p>
+
+              <div className="w-full h-80 min-w-0">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={result.yearlyProjections}  
+                   margin={{ top: 20, right: 30, left: 40, bottom: 30 }}>
+                    <CartesianGrid strokeDasharray="3 3" />
+
+                    <XAxis
+                      dataKey="age"
+                      label={{
+                        value: "Age",
+                        position: "insideBottom",
+                        offset: -5,
+                      }}
+                    />
+
+                    <YAxis
+                      tickFormatter={(value) =>
+                        `$${Number(value).toLocaleString("en-US", {
+                          maximumFractionDigits: 0,
+                        })}`
+                      }
+                    />
+
+                    <Tooltip
+                    labelFormatter={(label) => `Age ${label}`}
+                     labelStyle={{
+                    color: "#111827",
+                    fontWeight: 600,
+                    }}
+                  formatter={(value) => [
+                  formatCurrency(Number(value)),
+                  "Projected Balance",
+                  ]}
+                     
+                    />
+
+                    <Line
+                      type="monotone"
+                      dataKey="balance"
+                      strokeWidth={3}
+                      dot={false}
+                      name="Projected Balance"
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          </section>
+        )}
       </section>
     </main>
   );
